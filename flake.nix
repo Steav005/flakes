@@ -7,10 +7,7 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
-    flake-utils.lib.eachDefaultSystem (system:
-      {
-        packages = {
-          libusb = inputs.libusb.packages.${system}.libusb;
-        };
-      });
+    flake-utils.lib.eachDefaultSystem (system: {
+      packages = { libusb = inputs.libusb.packages.${system}.libusb; };
+    });
 }
