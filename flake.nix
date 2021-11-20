@@ -3,7 +3,7 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    libusb.url = "path:./libusb";
+    libusb.url = "path:libusb";
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
