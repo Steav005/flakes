@@ -10,8 +10,6 @@
         packages = flake-utils.lib.flattenTree {
           libusb = pkgs.stdenv.mkDerivation rec {
             name = "libusb";
-            # YearMonthDay
-            version = "pre-1.0.25-20210808";
             src = pkgs.fetchFromGitHub {
               owner = name;
               repo = name;
