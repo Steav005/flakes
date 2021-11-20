@@ -10,12 +10,13 @@
         packages = flake-utils.lib.flattenTree {
           libusb = pkgs.stdenv.mkDerivation rec {
             name = "libusb";
-            version = "pre-1.0.25-20211109";
+            # YearMonthDay
+            version = "pre-1.0.25-20210808";
             src = pkgs.fetchFromGitHub {
               owner = name;
               repo = name;
-              rev = "683e3cf21ed37d4492c20cea8de810c4d95ae8b6";
-              sha256 = "sha256-/DKnx9Ptmx4K+ySBLrHfEyQy9BOisB+fhSxftDxArkY=";
+              rev = "1a906274a66dd58bf81836db1306902d4a7dc185";
+              sha256 = "sha256-nqhzu5oxQ2jXd9Nbb5OzGKe4cVgg+CbJXIWuhp56pWY=";
             };
             buildInputs = with pkgs; [ libudev ];
             nativeBuildInputs = with pkgs; [ autoreconfHook ];
