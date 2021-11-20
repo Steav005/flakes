@@ -3,16 +3,39 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    libusb.url = "path:libusb";
-    fcitx5-nord.url = "path:fcitx5-nord";
+    #libusb.url = "./libusb";
+    #fcitx5-nord.url = "git+filefcitx5-nord";
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     flake-utils.lib.eachSystem [ "aarch64-linux" "i686-linux" "x86_64-linux" ]
-    (system: {
+    (system: 
+      let pkgs = nixpkgs.legacyPackages.${system};
+      in rec {
       packages = {
-        libusb = inputs.libusb.packages.${system}.libusb;
-        fcitx5-nord = inputs.fcitx5-nord.packages.${system}.fcitx5-nord;
+        libusb = pkgs.stdenv.mkDerivation rec {
+            name = "libusb";
+            src = pkgs.fetchFromGitHub {
+              owner = name;
+              repo = name;
+              rev = "1a906274a66dd58bf81836db1306902d4a7dc185";
+              sha256 = "sha256-nqhzu5oxQ2jXd9Nbb5OzGKe4cVgg+CbJXIWuhp56pWY=";
+            };
+            buildInputs = with pkgs; [ libudev ];
+            nativeBuildInputs = with pkgs; [ autoreconfHook ];
+          };
+        fcitx5-nord = pkgs.stdenv.mkDerivation rec {
+            name = "fcitx5-nord";
+            version = "bdaa8fb";
+            src = pkgs.fetchFromGitHub {
+              owner = "tonyfettes";
+              repo = name;
+              rev = "${version}723b8d0b22f237c9a60195c5f9c9d74d1";
+              sha256 = "sha256-qVo/0ivZ5gfUP17G29CAW0MrRFUO0KN1ADl1I/rvchE=";
+            };
+            unpackPhase = "mkdir $out";
+            installPhase = "cd ${src} && cp -r * $out";
+          };
       };
     });
 }
