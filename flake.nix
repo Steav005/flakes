@@ -9,11 +9,11 @@
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     flake-utils.lib.eachSystem [ "aarch64-linux" "i686-linux" "x86_64-linux" ]
-    (system: 
+    (system:
       let pkgs = nixpkgs.legacyPackages.${system};
       in rec {
-      packages = {
-        libusb = pkgs.stdenv.mkDerivation rec {
+        packages = {
+          libusb = pkgs.stdenv.mkDerivation rec {
             name = "libusb";
             src = pkgs.fetchFromGitHub {
               owner = name;
@@ -24,7 +24,7 @@
             buildInputs = with pkgs; [ libudev ];
             nativeBuildInputs = with pkgs; [ autoreconfHook ];
           };
-        fcitx5-nord = pkgs.stdenv.mkDerivation rec {
+          fcitx5-nord = pkgs.stdenv.mkDerivation rec {
             name = "fcitx5-nord";
             version = "bdaa8fb";
             src = pkgs.fetchFromGitHub {
@@ -36,6 +36,20 @@
             unpackPhase = "mkdir $out";
             installPhase = "cd ${src} && cp -r * $out";
           };
-      };
-    });
+          bibata = pkgs.stdenv.mkDerivation rec {
+            name = "bibata";
+            version = "1.1.2";
+            src = pkgs.fetchurl {
+              url =
+                "https://github.com/ful1e5/Bibata_Cursor/releases/download/v${version}/Bibata.tar.gz";
+              sha256 = "sha256-b2c2paSBmNZ1DNV4Jk2ROz8VR4lL/CXbyFPg+TS5G7w=";
+            };
+            phases = [ "installPhase" ];
+            installPhase = ''
+              mkdir -p $out/share/icons
+              tar xvf $src -C $out/share/icons/
+            '';
+          };
+        };
+      });
 }
