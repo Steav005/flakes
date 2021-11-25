@@ -21,7 +21,7 @@
               rev = "1a906274a66dd58bf81836db1306902d4a7dc185";
               sha256 = "sha256-nqhzu5oxQ2jXd9Nbb5OzGKe4cVgg+CbJXIWuhp56pWY=";
             };
-            buildInputs = with pkgs; [ libudev ];
+            buildInputs = with pkgs; [ libudev git ];
             nativeBuildInputs = with pkgs; [ autoreconfHook ];
           };
           fcitx5-nord = pkgs.stdenv.mkDerivation rec {
