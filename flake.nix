@@ -18,8 +18,8 @@
             src = pkgs.fetchFromGitHub {
               owner = name;
               repo = name;
-              rev = "1a906274a66dd58bf81836db1306902d4a7dc185";
-              sha256 = "sha256-nqhzu5oxQ2jXd9Nbb5OzGKe4cVgg+CbJXIWuhp56pWY=";
+              rev = "d4452bd5554b2e6cc7017ad9cdba54a848cf5e93";
+              sha256 = "sha256-vciHJxEOjcoYp2n2VWmVAEPkhikBx6IOQDl368TlBHw=";
             };
             buildInputs = with pkgs; [ libudev git ];
             nativeBuildInputs = with pkgs; [ autoreconfHook ];
