@@ -22,3 +22,5 @@ And `<package>` being the desired package i.e. `libusb`
 
 ## Packages
 - `libusb` version 1.0.25-pre
+- `fcitx5-nord` version ?
+- `Bibata` version 1.1.2
